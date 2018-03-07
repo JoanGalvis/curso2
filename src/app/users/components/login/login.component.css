@@ -1,0 +1,11 @@
+.error {
+	border-bottom: 1px solid red;
+}
+
+.login-wrapper .login .login-group .error {
+	display: initial;
+	background: transparent;
+	color: #000;
+	margin: .25rem 0 .75rem 0;
+	padding: 0 .25rem;
+}

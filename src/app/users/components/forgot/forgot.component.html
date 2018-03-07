@@ -1,0 +1,16 @@
+<form [formGroup]="forgotForm" (ngSubmit)="submitForgot($event)" novalidate>
+    <label class="title">
+        <h3 class="welcome">Welcome to</h3>
+        Company Product Name
+        <h5 class="hint">Use your Company ID to sign in or create one now</h5>
+    </label>
+    <div class="login-group">
+        <input class="username" type="text" id="username" placeholder="Username" formControlName="username">
+
+        <div [hidden]="true" class="error active">
+          Invalid user name or password
+        </div>
+        <button type="submit" class="btn btn-outline">Enviar</button>
+        <a href="javascript://" (click)="goBack()" class="signup">Iniciar sesion</a>
+    </div>
+</form>
