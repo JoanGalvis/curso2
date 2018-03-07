@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy, OnChanges {
   public loginForm: FormGroup = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(6)]],
     password: ['', [Validators.required, Validators.minLength(8), (control: FormControl) => {
-      if (control.value.length > 12) {
+      if (control.value && control.value.length > 12) {
         return {
           maxLength: {
             value: control.value,
@@ -59,12 +59,14 @@ export class LoginComponent implements OnInit, OnDestroy, OnChanges {
         const control = this.loginForm.get(field);
 
         control.markAsTouched({ onlySelf: true });
-        control.updateValueAndValidity({ onlySelf: true, emitEvent: true });
       });
+
+      this.loginForm.updateValueAndValidity({ onlySelf: true, emitEvent: true });
     }
   }
 
   public changeMode (data: any): void {
     this.mode = data;
+    this.loginForm.reset();
   }
 }

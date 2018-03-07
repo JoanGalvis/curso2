@@ -40,12 +40,14 @@ export class ForgotComponent implements OnInit, OnDestroy, OnChanges {
         const control = this.forgotForm.get(field);
 
         control.markAsTouched({ onlySelf: true });
-        control.updateValueAndValidity({ onlySelf: true, emitEvent: true });
       });
+
+      this.forgotForm.updateValueAndValidity({ onlySelf: true, emitEvent: true });
     }
   }
 
   public goBack (): void {
+    this.forgotForm.reset();
     this.onGoBack.emit('login');
   }
 }

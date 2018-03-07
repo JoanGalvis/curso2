@@ -5,7 +5,12 @@
         <h5 class="hint">Use your Company ID to sign in or create one now</h5>
     </label>
     <div class="login-group">
-        <input class="username" type="text" id="username" placeholder="Username" formControlName="username">
+        <input formControlName="username"
+          type="text"
+          id="username"
+          class="username"
+          placeholder="Username"
+          [ngClass]="{ 'error': forgotForm.get('username').touched && forgotForm.get('username').invalid }">
 
         <div [hidden]="true" class="error active">
           Invalid user name or password
