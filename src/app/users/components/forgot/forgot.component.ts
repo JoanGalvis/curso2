@@ -48,6 +48,7 @@ export class ForgotComponent implements OnInit, OnDestroy, OnChanges {
 
   public goBack (): void {
     this.forgotForm.reset();
+    this.mode = 'login';
     this.onGoBack.emit('login');
   }
 }

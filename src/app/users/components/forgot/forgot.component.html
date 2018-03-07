@@ -6,14 +6,14 @@
     </label>
     <div class="login-group">
         <input formControlName="username"
-          type="text"
-          id="username"
-          class="username"
-          placeholder="Username"
-          [ngClass]="{ 'error': forgotForm.get('username').touched && forgotForm.get('username').invalid }">
+            type="text"
+            id="username"
+            class="username"
+            placeholder="Username"
+            [ngClass]="{ 'error': forgotForm.get('username').touched && forgotForm.get('username').invalid }">
 
         <div [hidden]="true" class="error active">
-          Invalid user name or password
+            Invalid user name or password
         </div>
         <button type="submit" class="btn btn-outline">Enviar</button>
         <a href="javascript://" (click)="goBack()" class="signup">Iniciar sesion</a>
