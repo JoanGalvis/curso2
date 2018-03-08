@@ -37,7 +37,7 @@
     <app-forgot #forgot
         class="login"
         [mode]="mode"
-        [hidden]="mode  !== 'forgot'"
+        *ngIf="mode === 'forgot'"
         (onGoBack)="changeMode($event)">
     </app-forgot>
 </div>

@@ -9,8 +9,6 @@ import { ForgotComponent } from '../forgot/forgot.component';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit, OnDestroy, OnChanges {
-  @ViewChild('forgot') public forgot: ForgotComponent;
-
   public formBuilder = new FormBuilder();
   public loginForm: FormGroup = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(6)]],

@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, OnChanges, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-forgot',
@@ -7,13 +9,17 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
   styleUrls: ['./forgot.component.css']
 })
 export class ForgotComponent implements OnInit, OnDestroy, OnChanges {
-  @Input('mode') public mode: string;
   @Output('onGoBack') public onGoBack: EventEmitter<string> = new EventEmitter<string>();
 
+  public modeValue: string;
   public formBuilder = new FormBuilder();
   public forgotForm: FormGroup = this.formBuilder.group({
     username: ['', [Validators.required, Validators.minLength(6)]]
   });
+
+  public interval: Observable<any>;
+  public subs: Subscription;
+  public time: any;
 
   public constructor () {
     console.log('Constructor');
@@ -21,11 +27,26 @@ export class ForgotComponent implements OnInit, OnDestroy, OnChanges {
 
   public ngOnInit (): void {
     console.log('OnInit');
+    this.interval = Observable.create((data: any) => {
+      this.time = setInterval(() => {
+        console.log('Interval');
+      }, 1000);
+    });
+
+    this.subs = this.interval.subscribe((data: any) => {
+      this.time = setInterval(() => {
+        console.log('Interval');
+      }, 1000);
+    });
   }
 
   public ngOnDestroy (): void {
     // code here !
     console.log('OnDestroy');
+    console.log(this.subs);
+    this.subs.unsubscribe();
+    clearInterval(this.time);
+    console.log(this.subs);
   }
 
   public ngOnChanges (change: SimpleChanges): void {
@@ -50,5 +71,10 @@ export class ForgotComponent implements OnInit, OnDestroy, OnChanges {
     this.forgotForm.reset();
     this.mode = 'login';
     this.onGoBack.emit('login');
+  }
+
+  @Input('mode') set mode (val) {
+    this.modeValue = val;
+    this.onGoBack.emit(this.modeValue);
   }
 }
