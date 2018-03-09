@@ -1,5 +1,5 @@
 <div class="login-wrapper">
-    <form [hidden]="mode  !== 'login'" class="login" [formGroup]="loginForm" (ngSubmit)="submitLogin($event)" novalidate>
+    <form *ngIf="mode === 'login'" class="login" [formGroup]="loginForm" (ngSubmit)="submitLogin($event)" novalidate>
         <label class="title">
             <h3 class="welcome">Welcome to</h3>
             Company Product Name
@@ -32,12 +32,19 @@
             </div>
             <button type="submit" class="btn btn-outline">Enviar</button>
             <a href="javascript://" (click)="changeMode('forgot')" class="signup">Recuperar contraseña</a>
+            <br>
+            <a href="javascript://" (click)="changeMode('register')" class="signup">Registro</a>
         </div>
     </form>
     <app-forgot #forgot
         class="login"
-        [mode]="mode"
-        *ngIf="mode === 'forgot'"
-        (onGoBack)="changeMode($event)">
+        (onGoBack)="changeMode($event)"
+        *ngIf="mode === 'forgot'">
     </app-forgot>
+
+    <app-register #register
+        class="login"
+        [(mode)]="mode"
+        *ngIf="mode === 'register'">
+    </app-register>
 </div>

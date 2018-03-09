@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class ForgotComponent implements OnInit, OnDestroy, OnChanges {
   @Output('onGoBack') public onGoBack: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public modeChange:  EventEmitter<string> = new EventEmitter();
 
   public modeValue: string;
   public formBuilder = new FormBuilder();
@@ -20,6 +21,10 @@ export class ForgotComponent implements OnInit, OnDestroy, OnChanges {
   public interval: Observable<any>;
   public subs: Subscription;
   public time: any;
+
+  @Input() set mode(mode: string) {
+    this.modeValue = mode;
+  }
 
   public constructor () {
     console.log('Constructor');
@@ -69,12 +74,10 @@ export class ForgotComponent implements OnInit, OnDestroy, OnChanges {
 
   public goBack (): void {
     this.forgotForm.reset();
-    this.mode = 'login';
-    this.onGoBack.emit('login');
-  }
 
-  @Input('mode') set mode (val) {
-    this.modeValue = val;
+    this.modeValue = 'login';
+
     this.onGoBack.emit(this.modeValue);
+    this.modeChange.emit(this.modeValue);
   }
 }

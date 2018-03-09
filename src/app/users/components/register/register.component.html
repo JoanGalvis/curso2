@@ -1,3 +1,37 @@
-<p>
-  register works!
-</p>
+<form [formGroup]="registerForm" (ngSubmit)="submitForgot($event)" novalidate>
+  <label class="title">
+      <h3 class="welcome">Welcome to</h3>
+      Company Product Name
+      <h5 class="hint">Use your Company ID to sign in or create one now</h5>
+  </label>
+  <div class="login-group">
+      <input formControlName="username"
+          type="text"
+          id="username"
+          class="username"
+          placeholder="Username"
+          [ngClass]="{ 'error': registerForm.get('username').touched && registerForm.get('username').invalid }">
+
+        <input formControlName="password"
+          type="password"
+          id="password"
+          class="password"
+          autocomplete="password"
+          placeholder="Password"
+          [ngClass]="{ 'error': registerForm.get('password').touched && registerForm.get('password').invalid }">
+
+        <input formControlName="email"
+          type="email"
+          id="email"
+          class="email"
+          autocomplete='email'
+          placeholder="E-mail"
+          [ngClass]="{ 'error': registerForm.get('email').touched && registerForm.get('email').invalid }">
+
+      <div [hidden]="true" class="error active">
+          Invalid user name or password
+      </div>
+      <button type="submit" class="btn btn-outline">Enviar</button>
+      <a href="javascript://" (click)="goBack()" class="signup">Iniciar sesion</a>
+  </div>
+</form>
