@@ -11,6 +11,10 @@
                 id="login_username"
                 placeholder="Username"
                 formControlName="username"
+                (blur)="onBlurUsername()"
+                (change)="onChangeUsername()"
+                (focus)="onFocusUsername()"
+                [(ngModel)]="uname"
                 [ngClass]="{ 'error': loginForm.get('username').touched && loginForm.get('username').invalid }">
 
             <input class="password"
@@ -34,6 +38,10 @@
             <a href="javascript://" (click)="changeMode('forgot')" class="signup">Recuperar contraseña</a>
             <br>
             <a href="javascript://" (click)="changeMode('register')" class="signup">Registro</a>
+            <br>
+            {{ currentDate | date: 'full' }}
+            <br>
+            {{ uname | username: 'lowerCase,simbolos,espacios' }}
         </div>
     </form>
     <app-forgot #forgot

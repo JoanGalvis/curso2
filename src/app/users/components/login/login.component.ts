@@ -1,5 +1,8 @@
 import { Component, OnInit, OnChanges, OnDestroy, SimpleChanges, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import { UsernamePipe } from './../../../core/pipes/username.pipe';
 
 import { ForgotComponent } from '../forgot/forgot.component';
 
@@ -27,8 +30,12 @@ export class LoginComponent implements OnInit, OnDestroy, OnChanges {
   });
   public errors = [];
   public mode: string;
+  public currentDate: Date = new Date();
+  public uname: string;
 
-  public constructor () {
+  public constructor (
+    private _route: Router
+  ) {
     this.mode = 'login';
 
     console.log('Constructor');
@@ -51,7 +58,9 @@ export class LoginComponent implements OnInit, OnDestroy, OnChanges {
 
   public submitLogin(form): void {
     if (this.loginForm.valid) {
-      // code here !
+      const username = this.loginForm.get('username').value;
+
+      this._route.navigate(['/dashboard', { username: username }]);
     } else {
       Object.keys(this.loginForm.controls).forEach((field) => {
         const control = this.loginForm.get(field);
@@ -66,5 +75,17 @@ export class LoginComponent implements OnInit, OnDestroy, OnChanges {
   public changeMode (data: any): void {
     this.mode = data;
     this.loginForm.reset();
+  }
+
+  public onBlurUsername (): void {
+    console.log('onBlurUsername');
+  }
+
+  public onChangeUsername (): void {
+    console.log('onChangeUsername');
+  }
+
+  public onFocusUsername (): void {
+    console.log('onFocusUsername');
   }
 }
