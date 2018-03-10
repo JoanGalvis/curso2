@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit, OnDestroy, OnChanges {
     if (this.loginForm.valid) {
       const username = this.loginForm.get('username').value;
 
-      this._route.navigate(['/dashboard', { username: username }]);
+      this._route.navigate(['/dashboard', { username: username }], { skipLocationChange: true });
     } else {
       Object.keys(this.loginForm.controls).forEach((field) => {
         const control = this.loginForm.get(field);

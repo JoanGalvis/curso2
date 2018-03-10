@@ -15,7 +15,8 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.username = this._route.snapshot.paramMap.get('username');
+    this._route.paramMap.subscribe((params: ParamMap) => {
+      this.username = params.get('username');
+    });
   }
-
 }

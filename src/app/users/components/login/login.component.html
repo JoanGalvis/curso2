@@ -41,7 +41,7 @@
             <br>
             {{ currentDate | date: 'full' }}
             <br>
-            {{ uname | username: 'lowerCase,simbolos,espacios' }}
+            {{ uname | username: true : true : true }}
         </div>
     </form>
     <app-forgot #forgot
